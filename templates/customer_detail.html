@@ -6,8 +6,9 @@
     <a class="back-btn" href="{% url 'customer-list' %}">Back to home</a>
     <div class="customer-list">
         <h3 class="site-heading">{{ customer.first_name|title }} {{ customer.last_name|title }}</h3>
-        <div>
-            <canvas id="chart" width="500" height="300"></canvas>
+        <p class="date-details">{{ customer.birth_date }}</p>
+        <div class="canvas-container">
+            <canvas id="chart" width="500" height="250"></canvas>
         </div>
     </div>
 
@@ -30,7 +31,7 @@
                 {
                     label: "Incomes",
                     backgroundColor: "#8e5ea2",
-                    data: {{ income }}
+                    data: {{ income }},
                 }
             ]
         }

@@ -9,6 +9,7 @@
 @success: #0C8B5D;
 @error: rgb(182, 12, 139);
 @font : 'Roboto', sans-serif;
+@bl : #11627b;
 
 
 body{
@@ -52,8 +53,8 @@ body{
         }
 
         label{
-            width: 120px;
-            background: red;
+            width: 150px;
+            background: #11627b;
             text-align: center;
             height: 40px;
             margin-bottom: -21px;
@@ -62,8 +63,18 @@ body{
             cursor: pointer;
             color: #fff;
             cursor: pointer;
-        }
+            transition: all 0.3s ease-in-out;
+            border: solid 2px #11627b;
+            font-size: 15px;
 
+            &:hover{
+                color: #fff;
+                background-color: transparent;
+                border: solid 2px #11627b;
+                transition: all 0.3s ease-in-out;
+                color: #11627b;
+            }
+        }
 
         .submit-btn{
             background-color: @success;
@@ -125,12 +136,20 @@ body{
     vertical-align: top;
     margin-bottom: 15px;
 
+    &:hover{
+        .customer-name{
+            transition: all .3s ease-in-out;
+            color: @bl;
+        }
+    }
+
     .customer-name{
         font-size: 16px;
         line-height: 19px;
         color: #FFFFFF;
         text-align: center;
         text-decoration: none;
+        transition: all .3s ease-in-out
     }
 
     .customer-birthday{
@@ -168,7 +187,7 @@ body{
     position: absolute;
     bottom: 147px;
     font-size: 14px;
-    left: 170px;
+    left: 200px;
 }
 
 #lblError{
@@ -193,4 +212,17 @@ body{
         background-color: transparent;
         transition: all .3s ease-in-out;
     }
+}
+
+.canvas-container{
+    margin-top: 70px;
+}
+
+.date-details{
+    text-align: center;
+    font-size: 13px;
+    color: #cdcdcd;
+    margin-top: -10px;
+    border-bottom: solid 1px #cdcdcd;
+    padding-bottom: 40px;
 }
