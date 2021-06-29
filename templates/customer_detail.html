@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} | {{ customer.first_name }}-{{ customer.last_name }}{% endblock title %}
+
+
+{% block content %}
+    <a class="back-btn" href="{% url 'customer-list' %}">Back to home</a>
+    <div class="customer-list">
+        <h3 class="site-heading">{{ customer.first_name|title }} {{ customer.last_name|title }}</h3>
+        <div>
+            <canvas id="chart" width="500" height="300"></canvas>
+        </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> -->
+    <script src="/static/chart.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        // displaying a chart
+        let ctx = document.querySelector("#chart").getContext("2d");
+        let chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ['January', 'Febraury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [
+                {
+                    label: "Expenses",
+                    backgroundColor: "#79AEC8",
+                    fillColor : "#fff",
+                    borderColor: "#417690",
+                    data: {{ expense }}
+                },
+                {
+                    label: "Incomes",
+                    backgroundColor: "#8e5ea2",
+                    data: {{ income }}
+                }
+            ]
+        }
+        });
+    </script>
+{% endblock content %}
+    

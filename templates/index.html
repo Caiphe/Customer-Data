@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %} - New and List {% endblock title %}
+    
+{% block content %}
+    <div class="form-container">
+        <h3 class="site-heading">New Customer</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- {{ form }} -->
+            <input type="text" name="first_name" placeholder="First Name" required="" id="id_first_name">
+            <input type="text" name="last_name" placeholder="Last Name" required="" id="id_last_name">
+            <input type="date" name="birth_date" placeholder="Date of Birth" required="" id="id_birth_date">
+            <label for="id_file">Excel File</label>
+            <input type="file" name="file" required="" id="id_file">
+            <div id="uploadFile"></div>
+            <span id="lblError"></span>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="custom-alert {% if message.tags %} {{ message.tags }} {% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Displaying a list of all customers -->
+    {% if customers %}
+    <div class="customer-list">
+        <h3 class="site-heading">Customers</h3>
+        <div class="cards-list">
+            {% for customer in customers %}
+                <a href="{% url 'customer-detail' customer.slug %}" class="customer-card">
+                    <div class="customer-name">{{ customer.first_name|title }} {{ customer.last_name|title }}</div>
+                    <div class="customer-birthday">{{ customer.birth_date }}</div>
+                    <span class="read-more">More Details</span>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <script type="text/javascript">
+        var uploadBtn = document.getElementById('id_file');
+        var fileName = document.getElementById('uploadFile');
+
+        uploadBtn.onchange = function(){
+            ValidateExtension();
+        };
+
+        function ValidateExtension() {
+            var allowedFiles = [".xlsx"];
+            var fileUpload = document.getElementById("id_file");
+            var lblError = document.getElementById("lblError");
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+
+            if (!regex.test(fileUpload.value.toLowerCase())) {
+                lblError.innerHTML = "Please upload file having extensions: <b>" + allowedFiles.join(', ') + "</b> only.";
+                uploadFile.textContent = '';
+                return false;
+            }
+
+            lblError.innerHTML = "";
+            uploadFile.textContent = uploadBtn.files[0].name;
+            return true;
+        }
+
+    </script>
+{% endblock content %}
+    
