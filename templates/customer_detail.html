@@ -22,17 +22,16 @@
             labels: ['January', 'Febraury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             datasets: [
                 {
-                    label: "Expenses",
-                    backgroundColor: "#79AEC8",
-                    fillColor : "#fff",
-                    borderColor: "#417690",
-                    data: {{ expense }}
-                },
-                {
                     label: "Incomes",
                     backgroundColor: "#8e5ea2",
                     data: {{ income }},
+                },
+                {
+                    label: "Expenses",
+                    backgroundColor: "#79AEC8",
+                    data: {{ expense }}
                 }
+              
             ]
         }
         });

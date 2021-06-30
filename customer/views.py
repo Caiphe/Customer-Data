@@ -7,7 +7,7 @@ import openpyxl
 
 '''
     Adding new customers to the database
-    ans displaying a list of existing customers
+    and displaying a list of all existing customers
 '''
 def customer_list(request):
     customers = Customer.objects.all()
@@ -30,11 +30,15 @@ def customer_list(request):
     return render(request, 'index.html', context)
 
 
-''' Customer's details with a graph (Chart) '''
+''' 
+    Customer's details with a graph (Chart).
+    Here we're getting the data of a particular customer and manipulate the Excel file and pass
+    the income and the expenses to the front end
+
+'''
 def customer_detail(request, slug):
     customer = get_object_or_404(Customer, slug=slug)
     custom_file = customer.file
-    
     work_book = openpyxl.load_workbook(custom_file)
     sheets = work_book['Sheet1']
     row = sheets.max_row
